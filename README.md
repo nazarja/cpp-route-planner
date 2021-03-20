@@ -1,6 +1,11 @@
 
 # Installing on Fedora Linux
 
+_Instructions for other OS's can be found here:_  
+https://github.com/udacity/CppND-Route-Planning-Project
+
+#
+
 Make a new empty directory for the project
 ````
 mkdir cpp-route-planner && cd cpp-route-planner
@@ -11,12 +16,7 @@ Clone the project from github
 git clone git clone --recurse-submodules https://github.com/nazarja/cpp-route-planner.git  .
 ````
 
-
-
-## Install Dependencies - Fedora
-
-_Dependencies for other OS's can be found here:_  
-https://github.com/udacity/CppND-Route-Planning-Project#dependencies-for-running-locally
+## Install Dependencies
 
 - GCC: `sudo dnf groupinstall "Development Tools" && sudo dnf groupinstall "C Development Tools and Libraries"`
 - CMake: `sudo dnf install cmake`
@@ -33,7 +33,7 @@ https://github.com/udacity/CppND-Route-Planning-Project#dependencies-for-running
 ## Install IO2D
 
 ````
-cd /thirdparty
+cd thirdparty
 git clone --recurse-submodules https://github.2. com/cpp-io2d/P0267_RefImpl
 cd P0267_RefImpl
 mkdir Debug

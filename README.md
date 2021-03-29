@@ -34,7 +34,7 @@ git clone git clone --recurse-submodules https://github.com/nazarja/cpp-route-pl
 
 ````
 cd thirdparty
-git clone --recurse-submodules https://github.2. com/cpp-io2d/P0267_RefImpl
+git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl
 cd P0267_RefImpl
 mkdir Debug
 cd Debug

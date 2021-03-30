@@ -1,0 +1,52 @@
+
+## RouteModel
+
+* FindClosestNode()
+-provide start and end coords
+- returns closest node in store data
+
+------------------------------------------------------
+
+## Node
+
+* FindNeighbours()
+-finds neiboutrs of current node to add to open list
+
+* Distance()
+- finds distance between two nodes 
+- compute heurestic distance 
+- compute cost of travel between two nodes
+
+------------------------------------------------------
+
+## RoutePlanner - all methods for A*Search
+
+* AStarSearch
+- starts while loop while list is non empty
+
+* NextNode()
+- sorts open list and returns next node to explore
+
+* ConstructFinalPath()
+- goal has been found - creates vector of nodes in path from start to goal
+
+* AddNeighbours()
+- goal not found - add neighbours to open list
+
+ * FindNeighbours()
+    -on current node - vector of all valid current neighbours
+    - for each neighbour of current
+      - set parent of neighbour to current
+      ****(Keeping track of path constructed to construct path at end)
+      ****(Step through each parent node to find path to start again)
+
+      - set g value to current g + distance() to current
+      - set h using CalculateHValue()
+
+      - add neighbour to openList - mark neighbour as visited
+
+
+------------------------------------------------------
+
+* main()
+- after result main will create a render object with results from A*Search

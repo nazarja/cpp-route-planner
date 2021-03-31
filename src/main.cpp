@@ -72,7 +72,7 @@ int main(int argc, const char **argv)
     NewConsoleLine();
 
     // TODO 1: 
-    std::array<float, 4> points {-1,-1,-1,-1};
+/*    std::array<float, 4> points {-1,-1,-1,-1};
     std::array<std::string, 4> labels {"start_x", "start_y", "end_x", "end_y"};
 
     for (int i = 0; i < labels.size(); i++)
@@ -98,7 +98,7 @@ int main(int argc, const char **argv)
                 points[i] = -1;
             }
         }
-    }
+    }*/
 
     // blank line
     NewConsoleLine();
@@ -107,7 +107,8 @@ int main(int argc, const char **argv)
     RouteModel model{osm_data};
 
     // Create RoutePlanner object and perform A* search.
-    RoutePlanner route_planner{model, points[0], points[1], points[2], points[3]};
+     RoutePlanner route_planner{model, 0, 0, 90, 90};
+    // RoutePlanner route_planner{model, points[0], points[1], points[2], points[3]};
     route_planner.AStarSearch();
 
     std::cout << "Distance: " << route_planner.GetDistance() << " meters. \n";

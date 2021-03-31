@@ -44,6 +44,10 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
     }
 }
 
+bool Compare(RouteModel::Node const &node_1, RouteModel::Node const &node_2)
+{
+    return (node_1.g_value + node_1.h_value) > (node_2.g_value + node_2.h_value);
+}
 // TODO 5: Complete the NextNode method to sort the open list and return the next node.
 // Tips:
 // - Sort the open_list according to the sum of the h value and g value.
@@ -52,6 +56,11 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 // - Return the pointer.
 RouteModel::Node *RoutePlanner::NextNode()
 {
+    // sort open list using Compare, remove node with lowest (g+h) value, return that node
+    std::sort(this->open_list.begin(), this->open_list.end(), Compare);
+    RouteModel::Node *node = this->open_list.back();
+    this->open_list.pop_back();
+    return node;
 }
 
 // TODO 6: Complete the ConstructFinalPath method to return the final path found from your A* search.
@@ -84,4 +93,20 @@ void RoutePlanner::AStarSearch()
     RouteModel::Node *current_node = nullptr;
 
     // TODO: Implement your solution here.
+    // add start node to open list
+    this->open_list.push_back(this->start_node);
+
+
+    while (this->open_list.size() > 0)
+    {
+        // sort open list and get next node to expand
+        RouteModel::Node *next_node = this->NextNode();
+
+        // add neighbours
+        this->AddNeighbors(next_node);
+        std::cout << "Dont be infinite" << std::endl;
+    }
+
+    // goal has been reached if open list size is 0
+    // construct final path
 }

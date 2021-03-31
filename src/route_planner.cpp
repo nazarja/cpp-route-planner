@@ -30,9 +30,18 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node)
 // - For each node in current_node.neighbors, set the parent, the h_value, the g_value.
 // - Use CalculateHValue below to implement the h-Value calculation.
 // - For each node in current_node.neighbors, add the neighbor to open_list and set the node's visited attribute to true.
-
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 {
+    current_node->FindNeighbors();
+
+    for (RouteModel::Node *node : current_node->neighbors)
+    {
+        node->parent = current_node;
+        node->g_value = current_node->g_value + current_node->distance(*node);
+        node->h_value = this->CalculateHValue(node);
+        node->visited = true;
+        this->open_list.push_back(node);
+    }
 }
 
 // TODO 5: Complete the NextNode method to sort the open list and return the next node.
@@ -41,7 +50,6 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 // - Create a pointer to the node in the list with the lowest sum.
 // - Remove that node from the open_list.
 // - Return the pointer.
-
 RouteModel::Node *RoutePlanner::NextNode()
 {
 }
@@ -53,7 +61,6 @@ RouteModel::Node *RoutePlanner::NextNode()
 // - For each node in the chain, add the distance from the node to its parent to the distance variable.
 // - The returned vector should be in the correct order: the start node should be the first element
 //   of the vector, the end node should be the last element.
-
 std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node)
 {
     // Create path_found vector
@@ -72,7 +79,6 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 // - Use the NextNode() method to sort the open_list and return the next node.
 // - When the search has reached the end_node, use the ConstructFinalPath method to return the final path that was found.
 // - Store the final path in the m_Model.path attribute before the method exits. This path will then be displayed on the map tile.
-
 void RoutePlanner::AStarSearch()
 {
     RouteModel::Node *current_node = nullptr;

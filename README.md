@@ -10,10 +10,10 @@ Testing is provided using gtest suite from Google.
 `start_node(0,0)` is bottom left corner of map  
 `end_node(100,100)` is top right corner of map
 
-![completed route map](img/complete-route.png?raw=true "Completed Route Map")
+![completed route map](img/completed-route.png?raw=true "Completed Route Map")
 
 
-![test completed](img/test-complete.png?raw=true "Completed Tests")
+![test completed](img/tests-complete.png?raw=true "Completed Tests")
 
 
 # Installing on Fedora Linux

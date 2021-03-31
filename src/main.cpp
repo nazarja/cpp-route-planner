@@ -10,11 +10,6 @@
 #include "route_planner.h"
 
 using namespace std::experimental;
-using std::array;
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
 {
@@ -34,14 +29,14 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
 }
 
 // checks input is in valid range
-bool IsValidInput(float value) 
+bool IsValidInput(float const &value)
 {
     return (value >= 0 && value <= 100);  
 }
 
 // creates a blank line in the console
 void NewConsoleLine() {
-    cout << "\n" << endl;
+    std::cout << "\n" << std::endl;
 }
 
 // main
@@ -77,8 +72,8 @@ int main(int argc, const char **argv)
     NewConsoleLine();
 
     // TODO 1: 
-    array<float, 4> points {-1,-1,-1,-1};
-    array<string, 4> labels {"start_x", "start_y", "end_x", "end_y"};
+    std::array<float, 4> points {-1,-1,-1,-1};
+    std::array<std::string, 4> labels {"start_x", "start_y", "end_x", "end_y"};
 
     for (int i = 0; i < labels.size(); i++)
     {
@@ -86,19 +81,19 @@ int main(int argc, const char **argv)
         //  loop until valid input submitted
         while(!IsValidInput(points[i]))
         {
-            cout << "Enter a value between 0 and 100 for " << labels[i] << ": ";
-            cin >> points[i];
+            std::cout << "Enter a value between 0 and 100 for " << labels[i] << ": ";
+            std::cin >> points[i];
 
             // if input is not a float or is out of range
-            if (cin.fail() || !IsValidInput(points[i]))
+            if (std::cin.fail() || !IsValidInput(points[i]))
             {
                 // clear cin and remaining stream characters
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 
                 // inform user of error and reassign points[i] from 0 to -1
                 // red text hightlights error message
-                cout << "\x1B[31m" << "Invalid input, please try again ..." << "\033[0m\t\t" << endl;
+                std::cout << "\x1B[31m" << "Invalid input, please try again ..." << "\033[0m\t\t" << std::endl;
                 
                 points[i] = -1;
             }

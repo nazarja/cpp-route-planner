@@ -1,8 +1,10 @@
 # editors
 .vscode/
+.idea/
 
 # dirs
 build/
 P0267_RefImpl/
+cmake-build-debug/
 
 # files

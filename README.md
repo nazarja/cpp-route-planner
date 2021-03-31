@@ -1,3 +1,20 @@
+# C++ Route Planner using IO2D
+
+This application calculates and displays a route / path between two nodes input by the user.  
+It uses OpenStreetMap xml data (map.osm) and the 2d graphics library IO2D.  
+The algorithm used for calculating the route based on the nodes provided is the A*Search algorithm.
+User input is also validated to ensure type correctness and range is valid.
+Testing is provided using gtest suite from Google.
+
+
+`start_node(0,0)` is bottom left corner of map  
+`end_node(100,100)` is top right corner of map
+
+![completed route map](img/complete-route.png?raw=true "Completed Route Map")
+
+
+![test completed](img/test-complete.png?raw=true "Completed Tests")
+
 
 # Installing on Fedora Linux
 

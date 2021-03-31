@@ -56,6 +56,7 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
     // Create path_found vector
     distance = 0.0f;
     std::vector<RouteModel::Node> path_found;
+     std::cout << path_found.size();
 
     // TODO: Implement your solution here.
     // as start node has no parent, we will be done iterating then
@@ -68,6 +69,11 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
         distance += current_node->distance(*current_node->parent);
         current_node = current_node->parent;
     }
+
+    // start is excluded from while-loop above
+    // add to path vector to complete node vector
+    path_found.push_back(*this->start_node);
+
     // Multiply the distance by the scale of the map to get meters.
     distance *= m_Model.MetricScale();
 
@@ -102,4 +108,6 @@ void RoutePlanner::AStarSearch()
         // otherwise keep expanding neighbours
         else this->AddNeighbors(current_node);
     }
+
+    std::cout << start_node->x << std::endl;
 }

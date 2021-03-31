@@ -90,11 +90,11 @@ int main(int argc, const char **argv)
                 // clear cin and remaining stream characters
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                
+
                 // inform user of error and reassign points[i] from 0 to -1
                 // red text highlights error message
                 std::cout << "\x1B[31m" << "Invalid input, please try again ..." << "\033[0m\t\t" << std::endl;
-                
+
                 points[i] = -1;
             }
         }
@@ -108,7 +108,7 @@ int main(int argc, const char **argv)
 
     // Create RoutePlanner object and perform A* search.
     // RoutePlanner route_planner{model, 10, 10, 90, 90};
-     RoutePlanner route_planner{model, points[0], points[1], points[2], points[3]};
+    RoutePlanner route_planner{model, points[0], points[1], points[2], points[3]};
     route_planner.AStarSearch();
 
     std::cout << "Distance: " << route_planner.GetDistance() << " meters. \n";

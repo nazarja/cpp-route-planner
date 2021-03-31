@@ -44,10 +44,11 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
     }
 }
 
-bool Compare(RouteModel::Node const &node_1, RouteModel::Node const &node_2)
+bool Compare(RouteModel::Node const *node_1, RouteModel::Node const *node_2)
 {
-    return (node_1.g_value + node_1.h_value) > (node_2.g_value + node_2.h_value);
+    return (node_1->g_value + node_1->h_value) > (node_2->g_value + node_2->h_value);
 }
+
 // TODO 5: Complete the NextNode method to sort the open list and return the next node.
 // Tips:
 // - Sort the open_list according to the sum of the h value and g value.
@@ -90,23 +91,25 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 // - Store the final path in the m_Model.path attribute before the method exits. This path will then be displayed on the map tile.
 void RoutePlanner::AStarSearch()
 {
+    // add start node as first node to open_list
+    this->start_node->visited = true;
+    this->open_list.push_back(start_node);
+
+    // create pointer for to track current_node
     RouteModel::Node *current_node = nullptr;
 
-    // TODO: Implement your solution here.
-    // add start node to open list
-    this->open_list.push_back(this->start_node);
-
-
-    while (this->open_list.size() > 0)
+    while(this->open_list.size() > 0)
     {
-        // sort open list and get next node to expand
-        RouteModel::Node *next_node = this->NextNode();
+        // assign current node to next node in open_list
+        current_node = this->NextNode();
 
-        // add neighbours
-        this->AddNeighbors(next_node);
-        std::cout << "Dont be infinite" << std::endl;
+        // if distance to end node is 0, we are finished / at our goal
+        if (current_node->distance(*this->end_node) == 0)
+        {
+            this->m_Model.path = this->ConstructFinalPath(current_node);
+            break;
+        }
+        // otherwise keep expanding neighbours
+        else this->AddNeighbors(current_node);
     }
-
-    // goal has been reached if open list size is 0
-    // construct final path
 }
